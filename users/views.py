@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UserReqisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.conf import settings
 
 # Create your views here.
 def register(request):
@@ -26,6 +28,13 @@ def profile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
+            #sendmail(subject, message, from_email, to_list, fail_silently=True) testing
+            subject = 'sss'
+            message = 'xxxxx'
+            from_email = settings.EMAIL_HOST_USER
+            to_list = [u_form.email, p_form , settings.EMAIL_HOST_USER]
+            send_mail(subject,message,from_email,to_list,fail_silently=True)
+            #testing
             messages.success(request, f'Your account has been updated!')
             return redirect('profile')
     else:
