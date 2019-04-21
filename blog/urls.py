@@ -11,6 +11,10 @@ urlpatterns = [
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('about/', views.about, name='blog-about'),
-
+    path('todo/', views.todo, name='todo'),
+    path('todo1/', views.todo1, name='todo1'),
+    path('todo/delete/<list_id>', views.delete, name='delete'),
+    path('cross_off/<list_id>', views.cross_off, name='cross_off'),
+    path('uncross/<list_id>', views.uncross, name='uncross'),
 
 ]
