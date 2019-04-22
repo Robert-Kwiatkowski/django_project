@@ -8,22 +8,11 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .models import Post, List
-from django.contrib import messages
-from .forms import ListForm
+from .models import Post
 
 def home(request):
-
-    if request.method == 'POST':
-        form = ListForm(request.POST or None)
-
-        if form.is_valid():
-            form.save()
-            all_items = List.objects.all
-            messages.success(request, ('Item has been added'))
     context = {
         'posts': Post.objects.all(),
-        'all_items': all_items
     }
     return render(request, 'blog/home.html', context)
 
@@ -87,44 +76,6 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-def add(request):
-    if request.method == 'POST':
-        form = ListForm(request.POST or None)
-
-        if form.is_valid():
-            form.save()
-            all_items = List.objects.all
-            messages.success(request, ('Item has been added'))
-
-            return render(request, 'blog/todo1.html', {'all_items': all_items})
-    else:
-        all_items = List.objects.all
-        return render(request, 'blog/todo.html', {'all_items': all_items})
-
-def delete(request, list_id):
-    item = List.objects.get(pk=list_id)
-    item.delete()
-    messages.success(request, ('Item has been deleted!'))
-    return redirect('todo1')
-
-def cross_off(request, list_id):
-    item = List.objects.get(pk=list_id)
-    item.completed = True
-    item.save()
-    return redirect('todo1')
-
-def uncross(request, list_id):
-    item = List.objects.get(pk=list_id)
-    item.completed = False
-    item.save()
-    return redirect('todo1')
-
 def about(request):
     return render(request, 'blog/about.html', {'title': 'About'})
-
-def todo(request):
-    return render(request,'blog/todo.html', {'title' : 'To-Do'})
-
-def todo1(request):
-    return render(request,'blog/todo1.html', {'title' : 'To-Do1'})
 

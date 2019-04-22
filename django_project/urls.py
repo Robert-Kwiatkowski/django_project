@@ -19,6 +19,7 @@ from django.contrib.auth import views as auth_views
 from users import views as user_views
 from django.conf import settings
 from django.conf.urls.static import static
+from todo_list import views
 
 urlpatterns = [
     url('admin/', admin.site.urls),
@@ -47,6 +48,10 @@ urlpatterns = [
          ),
          name='password_reset_complete'),
     url('', include('blog.urls')),
+    url('1',include('todo_list.urls')),
+    #url('home1/delete/<list_id>', views.delete, name='delete'),
+    #url('home1/cross_off/<list_id>', views.cross_off, name='cross_off'),
+    #url('home1/uncross/<list_id>', views.uncross, name='uncross'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
