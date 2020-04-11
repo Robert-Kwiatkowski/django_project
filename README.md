@@ -1,4 +1,5 @@
 # django_project
-Basic django framework python project.
-This is actually my first web application. I've made the most important features like log in/out, add a post, set a profile pic etc.
+Django framework based web blog.  
+You can run the application by yourself, clone the repo, install dependencies listed in requirements.txt file and run the server.  
+Hosted version of the application:  
 https://robertkwiatkowskiapp.herokuapp.com/
